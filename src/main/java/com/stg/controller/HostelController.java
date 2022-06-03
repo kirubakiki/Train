@@ -20,7 +20,7 @@ import com.stg.service.HostelServiceImpl;
 
 @RestController
 @RequestMapping(value = "host")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class HostelController {
 	@Autowired
 	private HostelServiceImpl hostelService;

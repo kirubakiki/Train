@@ -23,7 +23,7 @@ import com.stg.service.HostellerServiceImpl;
 
 @RestController
 @RequestMapping(value = "hostlr")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class HostellerController {
 	@Autowired
 	private HostellerService hostellerServiceImpl;
@@ -51,7 +51,7 @@ public class HostellerController {
 	@PutMapping(value = "updatehostlr")
 	public Hosteller updateHostlr(@RequestBody Hosteller hosteller) {
 		return hostellerServiceImpl.updateHostlr(hosteller);
-	}
+	} 
 
 	@DeleteMapping(value = "/deletehostlrbynum/{hostlrNum}")
 	public int deleteHostlrByCode(@PathVariable int hostlrNum) {
