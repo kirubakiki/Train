@@ -53,7 +53,7 @@ public class HostellerController {
 		return hostellerServiceImpl.updateHostlr(hosteller);
 	} 
 
-	@DeleteMapping(value = "/deletehostlrbynum/{hostlrNum}")
+	@DeleteMapping(value = "/getalls/{hostlrNum}")
 	public int deleteHostlrByCode(@PathVariable int hostlrNum) {
 		return hostellerServiceImpl.deleteHostlrByCode(hostlrNum);
 	}

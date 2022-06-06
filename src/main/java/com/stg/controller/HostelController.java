@@ -25,7 +25,7 @@ public class HostelController {
 	@Autowired
 	private HostelServiceImpl hostelService;
 
-	@PostMapping(value = "createhost", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "getall", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Hostel createhost(@RequestBody Hostel hostel) {
 
 		return hostelService.createHost(hostel);
@@ -51,7 +51,7 @@ public class HostelController {
 		return hostelService.updateHost(hostel);
 	}
 
-	@DeleteMapping(value = "/deletehostbycode/{alias}")
+	@DeleteMapping(value = "/getall/{alias}")
 	public int deleteHostByCode(@PathVariable("alias") int hostCode) {
 		return hostelService.deleteHostByCode(hostCode);
 	}

@@ -25,10 +25,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
 @Entity
 public class Hosteller {
 	@Id
@@ -51,12 +48,14 @@ public class Hosteller {
 	@Column(name = "Advance_Amount", nullable = false)
 	private int hostellerAdvance;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private HostelRoom hostelRoom;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	private HostelRoom hostelRoom;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Hostel hostel;
+	
+
 
 	public Hosteller() {
 		super();
@@ -64,7 +63,8 @@ public class Hosteller {
 
 	public Hosteller(int hostelrNum, String hostelrName, int hostelrAge, LocalDate entryDate, String hostelrMarStatus,
 			String hostellerAddress, int hostellerPincode, String hostellerMobile, int hostellerAdvance,
-			HostelRoom hostelRoom, Hostel hostel) {
+		 Hostel hostel) {
+//		HostelRoom hostelRoom,
 		super();
 		this.hostelrNum = hostelrNum;
 		this.hostelrName = hostelrName;
@@ -75,7 +75,7 @@ public class Hosteller {
 		this.hostellerPincode = hostellerPincode;
 		this.hostellerMobile = hostellerMobile;
 		this.hostellerAdvance = hostellerAdvance;
-		this.hostelRoom = hostelRoom;
+		//this.hostelRoom = hostelRoom;
 		this.hostel = hostel;
 	}
 
@@ -151,13 +151,13 @@ public class Hosteller {
 		this.hostellerAdvance = hostellerAdvance;
 	}
 
-	public HostelRoom getHostelRoom() {
-		return hostelRoom;
-	}
-
-	public void setHostelRoom(HostelRoom hostelRoom) {
-		this.hostelRoom = hostelRoom;
-	}
+//	public HostelRoom getHostelRoom() {
+//		return hostelRoom;
+//	}
+//
+//	public void setHostelRoom(HostelRoom hostelRoom) {
+//		this.hostelRoom = hostelRoom;
+//	}
 
 	public Hostel getHostel() {
 		return hostel;
