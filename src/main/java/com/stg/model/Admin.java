@@ -26,7 +26,7 @@ public class Admin {
 	private int adminId;
 	@Column(name = "admin_name", length = 25)
 	private String adminName;
-	@Column(name = "admin_password")
+	@Column(name = "admin_password",length = 8)
 	private String adminPassword;
 	@OneToMany(mappedBy = "admin")
 	@JsonManagedReference

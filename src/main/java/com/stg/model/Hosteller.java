@@ -25,7 +25,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 public class Hosteller {
 	@Id
@@ -34,7 +33,7 @@ public class Hosteller {
 	@Column(name = "Hosteller_Name", length = 30, nullable = false, updatable = false)
 	private String hostelrName;
 	@Column(name = "Hosteller_Age", nullable = false, updatable = false)
-	private int hostelrAge;
+	private LocalDate hostelrdob;
 	@Column(name = "Date_Of_Joining", nullable = false)
 	private LocalDate entryDate;
 	@Column(name = "Marital_Status", nullable = false, updatable = false, length = 10)
@@ -48,34 +47,33 @@ public class Hosteller {
 	@Column(name = "Advance_Amount", nullable = false)
 	private int hostellerAdvance;
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	private HostelRoom hostelRoom;
-
-	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Hostel hostel;
+	private HostelRoom hostelRoom;
 	
+	@JsonBackReference
+	@ManyToOne(cascade =CascadeType.ALL,fetch =FetchType.LAZY)
+	@JoinColumn(name="hostelcode",referencedColumnName = "hostCode")
+	private Hostel hostel;
 
 
 	public Hosteller() {
 		super();
 	}
 
-	public Hosteller(int hostelrNum, String hostelrName, int hostelrAge, LocalDate entryDate, String hostelrMarStatus,
-			String hostellerAddress, int hostellerPincode, String hostellerMobile, int hostellerAdvance,
-		 Hostel hostel) {
-//		HostelRoom hostelRoom,
+	public Hosteller(int hostelrNum, String hostelrName, LocalDate hostelrdob, LocalDate entryDate,
+			String hostelrMarStatus, String hostellerAddress, int hostellerPincode, String hostellerMobile,
+			int hostellerAdvance, HostelRoom hostelRoom, Hostel hostel) {
 		super();
 		this.hostelrNum = hostelrNum;
 		this.hostelrName = hostelrName;
-		this.hostelrAge = hostelrAge;
+		this.hostelrdob = hostelrdob;
 		this.entryDate = entryDate;
 		this.hostelrMarStatus = hostelrMarStatus;
 		this.hostellerAddress = hostellerAddress;
 		this.hostellerPincode = hostellerPincode;
 		this.hostellerMobile = hostellerMobile;
 		this.hostellerAdvance = hostellerAdvance;
-		//this.hostelRoom = hostelRoom;
+		this.hostelRoom = hostelRoom;
 		this.hostel = hostel;
 	}
 
@@ -95,12 +93,12 @@ public class Hosteller {
 		this.hostelrName = hostelrName;
 	}
 
-	public int getHostelrAge() {
-		return hostelrAge;
+	public LocalDate getHostelrdob() {
+		return hostelrdob;
 	}
 
-	public void setHostelrAge(int hostelrAge) {
-		this.hostelrAge = hostelrAge;
+	public void setHostelrdob(LocalDate hostelrdob) {
+		this.hostelrdob = hostelrdob;
 	}
 
 	public LocalDate getEntryDate() {
@@ -151,13 +149,13 @@ public class Hosteller {
 		this.hostellerAdvance = hostellerAdvance;
 	}
 
-//	public HostelRoom getHostelRoom() {
-//		return hostelRoom;
-//	}
-//
-//	public void setHostelRoom(HostelRoom hostelRoom) {
-//		this.hostelRoom = hostelRoom;
-//	}
+	public HostelRoom getHostelRoom() {
+		return hostelRoom;
+	}
+
+	public void setHostelRoom(HostelRoom hostelRoom) {
+		this.hostelRoom = hostelRoom;
+	}
 
 	public Hostel getHostel() {
 		return hostel;

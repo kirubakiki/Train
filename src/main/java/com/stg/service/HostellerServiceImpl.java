@@ -21,19 +21,19 @@ public class HostellerServiceImpl implements HostellerService {
 	@Override
 	public Hosteller createHostlr(Hosteller hosteller) {
 
-		Hosteller temphost = null;
-		if (hosteller.getHostelrAge() >= 18 && hosteller.getHostelrAge() <= 60) {
-			if (hosteller.getHostellerAdvance() == 3000) {
-				temphost = hostellerRepository.save(hosteller);
-			} else {
-				throw new GeneralException("Minimum Advance Amount is 3000");
-			}
+//		Hosteller temphost = null;
+//		if (hosteller.getHostelrAge() >= 18 && hosteller.getHostelrAge() <= 60) {
+//			if (hosteller.getHostellerAdvance() == 3000) {
+//				temphost = hostellerRepository.save(hosteller);
+//			} else {
+//				throw new GeneralException("Minimum Advance Amount is 3000");
+//			}
+//
+//		} else {
+//			throw new GeneralException("Age is Not valid");
+//		}
 
-		} else {
-			throw new GeneralException("Age is Not valid");
-		}
-
-		return temphost;
+		return hostellerRepository.save(hosteller);
 	}
 
 	@Override
@@ -73,6 +73,7 @@ public class HostellerServiceImpl implements HostellerService {
 	public String deleteHostlrByName(String hostelrName) {
 
 		if (hostellerRepository.existsByHostelrName(hostelrName)) {
+			
 			hostellerRepository.deleteByHostelrName(hostelrName);
 
 		} else {
@@ -83,7 +84,7 @@ public class HostellerServiceImpl implements HostellerService {
 
 	@Override
 	public List<Hosteller> getHostellers() {
-		
+
 		return hostellerRepository.findAll();
 	}
 

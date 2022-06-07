@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -50,19 +51,17 @@ public class Hostel {
 	@Column(name = "Hostel_Proprietor", length = 25)
 	private String hostProp;
 
-	/*
-	 * @JsonManagedReference
-	 * 
-	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy =
-	 * "hostel") private Set<HostelRoom> hostelRooms;
-	 */
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "hostel")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hostel")
+	private Set<HostelRoom> hostelRooms;
+
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hostel")
 	private Set<Hosteller> hostellers;
 
 	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "idadmin", referencedColumnName = "adminId")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idadmin", referencedColumnName = "adminId",nullable = false)
 	private Admin admin;
 
 	public Hostel() {
@@ -183,5 +182,4 @@ public class Hostel {
 		this.admin = admin;
 	}
 
-	
 }

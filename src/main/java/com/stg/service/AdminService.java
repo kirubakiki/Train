@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.stg.model.Admin;
 
-
 public interface AdminService {
 
 	public abstract Admin createAdmin(Admin admin);
@@ -13,5 +12,7 @@ public interface AdminService {
 
 	public abstract int deleteByAdminId(int adminId);
 
-	 public abstract List<Admin> getadmins(); 
+	public abstract List<Admin> getadmins();
+
+	public abstract Admin updateAdmin(Admin admin);
 }

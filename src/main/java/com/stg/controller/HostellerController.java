@@ -28,7 +28,7 @@ public class HostellerController {
 	@Autowired
 	private HostellerService hostellerServiceImpl;
 
-	@PostMapping(value = "createhostlr", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "getalls", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Hosteller createHostlr(@RequestBody Hosteller hosteller) {
 		return hostellerServiceImpl.createHostlr(hosteller);
 	}

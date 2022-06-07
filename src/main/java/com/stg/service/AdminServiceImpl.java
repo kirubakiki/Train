@@ -35,16 +35,22 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public List<Admin> getadmins() {
+
+		return adminRepository.findAll();
+	}
+
+	@Override
+	public Admin updateAdmin(Admin admin) {
+
+		return adminRepository.save(admin);
+	}
+
+	@Override
 	public int deleteByAdminId(int adminId) {
 		if (adminRepository.existsById(adminId)) {
 			adminRepository.deleteById(adminId);
 		}
 		return adminId;
-	}
-
-	@Override
-	public List<Admin> getadmins() {
-		
-		return adminRepository.findAll();
 	}
 }
