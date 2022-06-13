@@ -18,8 +18,10 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Admin createAdmin(Admin admin) {
+
 		if (admin.getAdminName().equals(adminRepository.findByAdminName(admin.getAdminName()))) {
-			throw new GeneralException("Username Already Exists!");
+
+			throw new GeneralException("AdminName Already Exists!");
 		} else {
 			adminRepository.save(admin);
 		}
@@ -52,5 +54,21 @@ public class AdminServiceImpl implements AdminService {
 			adminRepository.deleteById(adminId);
 		}
 		return adminId;
+	}
+
+	@Override
+	public Admin Login(String adminName, String adminPassword) {
+		Admin tempadmin = adminRepository.findByAdminName(adminName);
+		if (tempadmin != null) {
+			if (tempadmin.getAdminPassword().equals(adminPassword)) {
+				return tempadmin;
+			} else {
+				throw new GeneralException("Wrong Credentials");
+			}
+
+		} else {
+			throw new GeneralException("Admin Not Found");
+		}
+
 	}
 }

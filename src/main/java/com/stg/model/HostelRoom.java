@@ -19,26 +19,19 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import net.bytebuddy.dynamic.TypeResolutionStrategy.Lazy;
-
 @Entity
-
 @Table(name = "rooms")
 public class HostelRoom {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int roomId;
 
 	@Column(name = "sharing")
-	private String typeOfSharing;
+	private int typeOfSharing;
 
 	@Column(name = "Room_Number")
-	private String roomNumber;
+	private int roomNumber;
 
 	@Column(name = "Room_Vacancy")
 	private int roomVacancy;
@@ -46,19 +39,20 @@ public class HostelRoom {
 	@Column(name = "Room_Occupied")
 	private int roomOccupied;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY)
 	private Set<Hosteller> hostellers;
-	
+
 	@JsonBackReference
-	@ManyToOne(cascade =CascadeType.ALL,fetch =FetchType.LAZY)
-	@JoinColumn(name="hostelcode",referencedColumnName = "hostCode",nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode", nullable = false)
 	private Hostel hostel;
 
 	public HostelRoom() {
 		super();
 	}
 
-	public HostelRoom(int roomId, String typeOfSharing, String roomNumber, int roomVacancy, int roomOccupied,
+	public HostelRoom(int roomId, int typeOfSharing, int roomNumber, int roomVacancy, int roomOccupied,
 			Set<Hosteller> hostellers) {
 		super();
 		this.roomId = roomId;
@@ -77,19 +71,19 @@ public class HostelRoom {
 		this.roomId = roomId;
 	}
 
-	public String getTypeOfSharing() {
+	public int getTypeOfSharing() {
 		return typeOfSharing;
 	}
 
-	public void setTypeOfSharing(String typeOfSharing) {
+	public void setTypeOfSharing(int typeOfSharing) {
 		this.typeOfSharing = typeOfSharing;
 	}
 
-	public String getRoomNumber() {
+	public int getRoomNumber() {
 		return roomNumber;
 	}
 
-	public void setRoomNumber(String roomNumber) {
+	public void setRoomNumber(int roomNumber) {
 		this.roomNumber = roomNumber;
 	}
 
@@ -115,6 +109,14 @@ public class HostelRoom {
 
 	public void setHostellers(Set<Hosteller> hostellers) {
 		this.hostellers = hostellers;
+	}
+	
+	public Hostel getHostel() {
+		return hostel;
+	}
+
+	public void setHostel(Hostel hostel) {
+		this.hostel = hostel;
 	}
 
 }

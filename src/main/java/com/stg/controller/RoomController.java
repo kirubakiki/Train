@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stg.model.HostelRoom;
-import com.stg.model.Hosteller;
+
 import com.stg.service.RoomService;
 
 @RestController
 @RequestMapping(value = "room")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class RoomController {
 
 	@Autowired

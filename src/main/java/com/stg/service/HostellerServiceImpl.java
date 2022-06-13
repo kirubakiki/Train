@@ -73,7 +73,7 @@ public class HostellerServiceImpl implements HostellerService {
 	public String deleteHostlrByName(String hostelrName) {
 
 		if (hostellerRepository.existsByHostelrName(hostelrName)) {
-			
+
 			hostellerRepository.deleteByHostelrName(hostelrName);
 
 		} else {

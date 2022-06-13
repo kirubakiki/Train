@@ -15,4 +15,6 @@ public interface AdminService {
 	public abstract List<Admin> getadmins();
 
 	public abstract Admin updateAdmin(Admin admin);
+
+	public abstract Admin Login(String adminName, String adminPassword);
 }

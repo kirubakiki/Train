@@ -12,8 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stg.model.Hostel;
 import com.stg.service.HostelService;
 import com.stg.service.HostelServiceImpl;
@@ -25,7 +30,7 @@ public class HostelController {
 	@Autowired
 	private HostelServiceImpl hostelService;
 
-	@PostMapping(value = "getall", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "getalls", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Hostel createhost(@RequestBody Hostel hostel) {
 
 		return hostelService.createHost(hostel);
@@ -41,8 +46,9 @@ public class HostelController {
 	public Hostel readByHostCode(@PathVariable("alias") String hostName) {
 		return hostelService.readHostByName(hostName);
 	}
-	@GetMapping(value="/getall")
-	public List<Hostel> getAll(){
+
+	@GetMapping(value = "/getalls")
+	public List<Hostel> getAll() {
 		return hostelService.getHostels();
 	}
 
@@ -51,7 +57,7 @@ public class HostelController {
 		return hostelService.updateHost(hostel);
 	}
 
-	@DeleteMapping(value = "/getall/{alias}")
+	@DeleteMapping(value = "/getalls/{alias}")
 	public int deleteHostByCode(@PathVariable("alias") int hostCode) {
 		return hostelService.deleteHostByCode(hostCode);
 	}

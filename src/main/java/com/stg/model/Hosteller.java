@@ -32,7 +32,7 @@ public class Hosteller {
 	private int hostelrNum;
 	@Column(name = "Hosteller_Name", length = 30, nullable = false, updatable = false)
 	private String hostelrName;
-	@Column(name = "Hosteller_Age", nullable = false, updatable = false)
+	@Column(name = "Hosteller_Dob", nullable = false, updatable = false)
 	private LocalDate hostelrdob;
 	@Column(name = "Date_Of_Joining", nullable = false)
 	private LocalDate entryDate;
@@ -47,12 +47,14 @@ public class Hosteller {
 	@Column(name = "Advance_Amount", nullable = false)
 	private int hostellerAdvance;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="roomId",referencedColumnName = "roomId", nullable = false)
 	private HostelRoom hostelRoom;
 	
 	@JsonBackReference
-	@ManyToOne(cascade =CascadeType.ALL,fetch =FetchType.LAZY)
-	@JoinColumn(name="hostelcode",referencedColumnName = "hostCode")
+	@ManyToOne(fetch =FetchType.LAZY)
+	@JoinColumn(name="hostelcode",referencedColumnName = "hostCode",nullable = false)
 	private Hostel hostel;
 
 

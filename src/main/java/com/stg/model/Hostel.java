@@ -22,10 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
 @Entity
 @Table(name = "hostel")
 public class Hostel {
@@ -52,16 +49,16 @@ public class Hostel {
 	private String hostProp;
 
 	@JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hostel")
+    @OneToMany( fetch = FetchType.LAZY, mappedBy = "hostel")
 	private Set<HostelRoom> hostelRooms;
-
+	
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hostel")
+	@OneToMany( fetch = FetchType.LAZY, mappedBy = "hostel")
 	private Set<Hosteller> hostellers;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idadmin", referencedColumnName = "adminId",nullable = false)
+	@JoinColumn(name = "idadmin", referencedColumnName = "adminId",nullable = false) //nullable done after data feeded
 	private Admin admin;
 
 	public Hostel() {

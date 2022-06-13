@@ -2,8 +2,10 @@ package com.stg.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +19,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Table(name = "admin")
 public class Admin {
@@ -26,10 +27,11 @@ public class Admin {
 	private int adminId;
 	@Column(name = "admin_name", length = 25)
 	private String adminName;
-	@Column(name = "admin_password",length = 8)
+	@Column(name = "admin_password", length = 8)
 	private String adminPassword;
-	@OneToMany(mappedBy = "admin")
+
 	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "admin")
 	private List<Hostel> hostels;
 
 	public Admin() {

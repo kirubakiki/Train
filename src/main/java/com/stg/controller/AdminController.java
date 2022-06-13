@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,25 +37,31 @@ public class AdminController {
 
 		return adminService.createAdmin(admin);
 	}
-@PostMapping(value="/authenticate")
+
+	@PostMapping(value = "/authenticate")
 	public Map<String, String> generateToken(@RequestBody Admin admin) {
 		long timestamp = System.currentTimeMillis();
 		String token = Jwts.builder().signWith(SignatureAlgorithm.HS256, Constants.API_SECRET_KEY)
 				.setIssuedAt(new Date(timestamp)).setExpiration(new Date(timestamp + Constants.TOKEN_VALIDITY))
 				.claim("admiId", admin.getAdminId()).claim("adminName", admin.getAdminName())
 				.claim("adminPassword", admin.getAdminPassword()).compact();
-		
-		Map<String, String> map =new HashMap<>();
+
+		Map<String, String> map = new HashMap<>();
 		map.put("JWT", token);
 		return map;
-	} 
+	}
 
-	@GetMapping(value = "/getadminlist")
+	@GetMapping(value = "/getadminlists")
 	public List<Admin> getAllAdmin() {
 		return adminService.getadmins();
 	}
 
-	@DeleteMapping(value = "/getadminlist/{adminId}")
+	@PutMapping(value = "/getadminlist")
+	public Admin updateAdmin(@RequestBody Admin admin) {
+		return adminService.updateAdmin(admin);
+	}
+
+	@DeleteMapping(value = "/getadminlists/{adminId}")
 	public int deleteByAdminId(@PathVariable int adminId) {
 		return adminService.deleteByAdminId(adminId);
 	}

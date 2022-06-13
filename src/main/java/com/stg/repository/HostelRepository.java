@@ -1,5 +1,7 @@
 package com.stg.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +18,6 @@ public interface HostelRepository extends JpaRepository<Hostel, Integer> {
 	
 	public boolean existsByHostName(String hostName);
 
+	
 	
 }

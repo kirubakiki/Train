@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stg.exception.GeneralException;
+import com.stg.model.Hostel;
 import com.stg.model.HostelRoom;
 
 import com.stg.repository.RoomRepository;
@@ -20,14 +21,18 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public HostelRoom createRoom(HostelRoom hostelRoom) {
-		roomRepository.existsByRoomNumber(hostelRoom.getRoomNumber());
-		boolean isRooms = roomRepository.existsByRoomNumber(hostelRoom.getRoomNumber());
-		if (isRooms != true) {
-			return roomRepository.save(hostelRoom);
-		} else {
-			throw new GeneralException("Room Number Already Exists");
-		}
 
+		List<HostelRoom> list = roomRepository.findByHostCode(hostelRoom.getHostel().getHostCode());
+		
+		for (HostelRoom hostelRoom2 : list) {
+			if (hostelRoom.getRoomNumber() != hostelRoom2.getRoomNumber()) {
+				System.out.println(hostelRoom.getHostel().getHostCode()+"//////////////////////");
+				roomRepository.save(hostelRoom);
+			} else {
+				throw new GeneralException("Room Number Already Exists");
+			}
+		}
+		return roomRepository.save(hostelRoom);
 	}
 
 	@Override
@@ -48,6 +53,7 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public HostelRoom updateRoom(HostelRoom hostelRoom) {
+		
 
 		return roomRepository.save(hostelRoom);
 	}
