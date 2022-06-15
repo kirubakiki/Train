@@ -72,4 +72,22 @@ public class RoomServiceImpl implements RoomService {
 		return roomId;
 	}
 
+	@Override
+	public int numberOfSharing(int typeOfSharing) {
+		
+		return 0;
+	}
+
+	@Override
+	public int numberOfOccupancy(int roomOccupied) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int numberOfVacancy(int roomVacancy) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

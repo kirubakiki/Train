@@ -18,5 +18,11 @@ public interface RoomService {
 
 	public abstract HostelRoom updateRoom(HostelRoom hostelRoom);
 	
+	public abstract int numberOfSharing(int typeOfSharing);
+	
+	public abstract int numberOfOccupancy(int roomOccupied);
+	
+	public abstract int numberOfVacancy(int roomVacancy);
+	
 	
 }

@@ -39,11 +39,11 @@ public class HostelRoom {
 	@Column(name = "Room_Occupied")
 	private int roomOccupied;
 
-	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY)
+	@JsonManagedReference(value="user")
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Set<Hosteller> hostellers;
 
-	@JsonBackReference
+	@JsonBackReference(value="roomhostel")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode", nullable = false)
 	private Hostel hostel;

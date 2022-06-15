@@ -12,16 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 
 @Entity
 @Table(name = "hostel")
@@ -33,10 +28,8 @@ public class Hostel {
 	private String hostName;
 	@Column(name = "LANDMARK")
 	private String landMark;
-	@Column(name = "ADDRESS_LINE_1")
-	private String addressLine1;
-	@Column(name = "ADDRESS_LINE_2")
-	private String addressLine2;
+	@Column(name = "ADDRESS")
+	private String address;
 	@Column(name = "CITY")
 	private String city;
 	@Column(name = "STATE")
@@ -45,40 +38,41 @@ public class Hostel {
 	private String pinCode;
 	@Column(name = "Hostel_Contact", length = 10)
 	private String hostContactNumber;
-	@Column(name = "Hostel_Proprietor", length = 25)
-	private String hostProp;
 
-	@JsonManagedReference
-    @OneToMany( fetch = FetchType.LAZY, mappedBy = "hostel")
+	@JsonManagedReference(value = "roomhostel")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hostel")
 	private Set<HostelRoom> hostelRooms;
-	
-	@JsonManagedReference
-	@OneToMany( fetch = FetchType.LAZY, mappedBy = "hostel")
+
+	@JsonManagedReference(value = "host")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hostel")
 	private Set<Hosteller> hostellers;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idadmin", referencedColumnName = "adminId",nullable = false) //nullable done after data feeded
+	@JoinColumn(name = "idadmin", referencedColumnName = "adminId", nullable = false) // nullable done after data feeded
 	private Admin admin;
+//
+//	@OneToOne
+//	@JsonManagedReference(value = "add")
+//	private Address address;
 
 	public Hostel() {
 		super();
 	}
 
-	public Hostel(int hostCode, String hostName, String landMark, String addressLine1, String addressLine2, String city,
-			String state, String pinCode, String hostContactNumber, String hostProp, Set<Hosteller> hostellers,
+	public Hostel(int hostCode, String hostName, String landMark, String address, String city, String state,
+			String pinCode, String hostContactNumber, Set<HostelRoom> hostelRooms, Set<Hosteller> hostellers,
 			Admin admin) {
 		super();
 		this.hostCode = hostCode;
 		this.hostName = hostName;
 		this.landMark = landMark;
-		this.addressLine1 = addressLine1;
-		this.addressLine2 = addressLine2;
+		this.address = address;
 		this.city = city;
 		this.state = state;
 		this.pinCode = pinCode;
 		this.hostContactNumber = hostContactNumber;
-		this.hostProp = hostProp;
+		this.hostelRooms = hostelRooms;
 		this.hostellers = hostellers;
 		this.admin = admin;
 	}
@@ -107,20 +101,12 @@ public class Hostel {
 		this.landMark = landMark;
 	}
 
-	public String getAddressLine1() {
-		return addressLine1;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddressLine1(String addressLine1) {
-		this.addressLine1 = addressLine1;
-	}
-
-	public String getAddressLine2() {
-		return addressLine2;
-	}
-
-	public void setAddressLine2(String addressLine2) {
-		this.addressLine2 = addressLine2;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getCity() {
@@ -155,12 +141,12 @@ public class Hostel {
 		this.hostContactNumber = hostContactNumber;
 	}
 
-	public String getHostProp() {
-		return hostProp;
+	public Set<HostelRoom> getHostelRooms() {
+		return hostelRooms;
 	}
 
-	public void setHostProp(String hostProp) {
-		this.hostProp = hostProp;
+	public void setHostelRooms(Set<HostelRoom> hostelRooms) {
+		this.hostelRooms = hostelRooms;
 	}
 
 	public Set<Hosteller> getHostellers() {

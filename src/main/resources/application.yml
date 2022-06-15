@@ -6,7 +6,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: Reset123
-    url: jdbc:mysql://localhost:3306/finaldb2
+    url: jdbc:mysql://localhost:3306/finaldb
     username: root
   jpa:
     hibernate:

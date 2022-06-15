@@ -18,3 +18,4 @@ public interface RoomRepository extends JpaRepository<HostelRoom, Integer> {
 	public abstract List<HostelRoom> findByHostCode(int hostcode);
 
 }
+

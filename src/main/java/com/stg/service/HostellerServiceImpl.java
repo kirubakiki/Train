@@ -10,16 +10,29 @@ import org.springframework.transaction.annotation.Transactional;
 import com.stg.exception.GeneralException;
 
 import com.stg.model.Hostel;
+import com.stg.model.HostelRoom;
 import com.stg.model.Hosteller;
 import com.stg.repository.HostellerRepository;
+import com.stg.repository.RoomRepository;
 
 @Service
 public class HostellerServiceImpl implements HostellerService {
 	@Autowired
 	private HostellerRepository hostellerRepository;
 
+	@Autowired
+	private RoomRepository roomRepository;
+
 	@Override
 	public Hosteller createHostlr(Hosteller hosteller) {
+		if ((hosteller.getHostelrdob().getYear() >= 2004) && (hosteller.getHostelrdob().getMonthValue() >= 6)) {
+			throw new GeneralException("Age Should Be Above 18");
+		} else {
+			hostellerRepository.save(hosteller);
+		}
+
+		return hosteller;
+	}
 
 //		Hosteller temphost = null;
 //		if (hosteller.getHostelrAge() >= 18 && hosteller.getHostelrAge() <= 60) {
@@ -32,9 +45,6 @@ public class HostellerServiceImpl implements HostellerService {
 //		} else {
 //			throw new GeneralException("Age is Not valid");
 //		}
-
-		return hostellerRepository.save(hosteller);
-	}
 
 	@Override
 	public Hosteller readHostlrByNum(int hostelrNum) {

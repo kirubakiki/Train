@@ -10,5 +10,7 @@ import com.stg.model.Admin;
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
 	public Admin findByAdminName(String adminName);
+	
+	
 
 }

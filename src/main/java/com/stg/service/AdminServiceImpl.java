@@ -22,7 +22,8 @@ public class AdminServiceImpl implements AdminService {
 		if (admin.getAdminName().equals(adminRepository.findByAdminName(admin.getAdminName()))) {
 
 			throw new GeneralException("AdminName Already Exists!");
-		} else {
+		} 
+		else {
 			adminRepository.save(admin);
 		}
 		return admin;

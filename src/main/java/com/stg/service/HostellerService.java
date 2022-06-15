@@ -21,4 +21,5 @@ public interface HostellerService {
 
 	public abstract String deleteHostlrByName(String hostelrName);
 
+
 }
