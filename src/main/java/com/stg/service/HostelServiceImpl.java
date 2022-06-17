@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stg.exception.GeneralException;
+import com.stg.model.Admin;
 import com.stg.model.Hostel;
 import com.stg.model.Hosteller;
 import com.stg.repository.HostelRepository;
@@ -65,6 +66,19 @@ public class HostelServiceImpl implements HostelService {
 		}
 
 		return hostCode;
+	}
+
+	@Override
+	public Hostel getHostelByHostCode(int hostCode) {
+		
+		Hostel tempHostel = null;
+		if(hostelRepository.existsById(hostCode)) {
+			tempHostel = hostelRepository.findById(hostCode).get();
+			return tempHostel;
+		}else {
+			throw new GeneralException("Hostel Not Found");
+		}
+		
 	}
 
 	/*

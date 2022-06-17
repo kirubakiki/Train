@@ -18,9 +18,10 @@ public interface HostellerRepository extends JpaRepository<Hosteller, Integer> {
 	public Hosteller findByhostelrName(String hostelrName);
 
 	public boolean existsByHostelrName(String hostelrName);
-	
-	@Query(value =  "select * from rooms where typeOfSharing = ?",nativeQuery = true)
-public abstract List<HostelRoom> findByRoomSharing(int typeOfSharing);
 
+	@Query(value = "select * from rooms where typeOfSharing = ?", nativeQuery = true)
+	public abstract List<HostelRoom> findByRoomSharing(int typeOfSharing);
+	
+	//public abstract List<HostelRoom> findByHostCode(int hostcode);
 
 }

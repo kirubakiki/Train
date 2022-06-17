@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stg.model.Admin;
 import com.stg.model.Hostel;
 import com.stg.service.HostelService;
 import com.stg.service.HostelServiceImpl;
@@ -50,6 +51,11 @@ public class HostelController {
 	@GetMapping(value = "/getalls")
 	public List<Hostel> getAll() {
 		return hostelService.getHostels();
+	}
+	
+	@GetMapping(value = "/getalls/{hostCode}")
+	public Hostel getHostelByHostCode(@PathVariable int hostCode) {
+		return hostelService.getHostelByHostCode(hostCode);
 	}
 
 	@PutMapping(value = "updatehost")

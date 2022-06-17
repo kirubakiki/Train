@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stg.model.Admin;
@@ -64,6 +65,16 @@ public class AdminController {
 	@DeleteMapping(value = "/getadminlists/{adminId}")
 	public int deleteByAdminId(@PathVariable int adminId) {
 		return adminService.deleteByAdminId(adminId);
+	}
+	
+	@GetMapping(value = "/getadminlists/{adminId}")
+	public Admin getAdminByAdminId(@PathVariable int adminId) {
+		return adminService.getAdminByAdminId(adminId);
+	}
+
+	@GetMapping(value = "/adminlogin")
+	public Admin Login(@RequestParam String adminName, @RequestParam String adminPassword) {
+		return adminService.Login(adminName, adminPassword);
 	}
 
 }

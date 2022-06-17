@@ -23,10 +23,10 @@ public class RoomServiceImpl implements RoomService {
 	public HostelRoom createRoom(HostelRoom hostelRoom) {
 
 		List<HostelRoom> list = roomRepository.findByHostCode(hostelRoom.getHostel().getHostCode());
-		
+
 		for (HostelRoom hostelRoom2 : list) {
 			if (hostelRoom.getRoomNumber() != hostelRoom2.getRoomNumber()) {
-				System.out.println(hostelRoom.getHostel().getHostCode()+"//////////////////////");
+				System.out.println(hostelRoom.getHostel().getHostCode() + "//////////////////////");
 				roomRepository.save(hostelRoom);
 			} else {
 				throw new GeneralException("Room Number Already Exists");
@@ -53,7 +53,6 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public HostelRoom updateRoom(HostelRoom hostelRoom) {
-		
 
 		return roomRepository.save(hostelRoom);
 	}
@@ -73,21 +72,43 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public int numberOfSharing(int typeOfSharing) {
-		
-		return 0;
+	public HostelRoom readByNumberOfSharing(int typeOfSharing) {
+		Optional<HostelRoom> optionalHostel = roomRepository.findById(typeOfSharing);
+
+		HostelRoom hostelRoom = optionalHostel.get();
+
+		return hostelRoom;
 	}
 
 	@Override
-	public int numberOfOccupancy(int roomOccupied) {
-		// TODO Auto-generated method stub
-		return 0;
+	public HostelRoom readByNumberOfOccupancy(int roomOccupied) {
+
+		Optional<HostelRoom> optionalHostel = roomRepository.findById(roomOccupied);
+
+		HostelRoom hostelRoom = optionalHostel.get();
+
+		return hostelRoom;
 	}
 
 	@Override
-	public int numberOfVacancy(int roomVacancy) {
-		// TODO Auto-generated method stub
-		return 0;
+	public HostelRoom readByNumberOfVacancy(int roomVacancy) {
+		Optional<HostelRoom> optionalHostel = roomRepository.findById(roomVacancy);
+
+		HostelRoom hostelRoom = optionalHostel.get();
+
+		return hostelRoom;
+	}
+
+	@Override
+	public HostelRoom getRoomByRoomId(int roomId) {
+		HostelRoom tempHostelroom = null;
+		if (roomRepository.existsById(roomId)) {
+			tempHostelroom = roomRepository.findById(roomId).get();
+			return tempHostelroom;
+		} else {
+			throw new GeneralException("Room Not Found");
+		}
+
 	}
 
 }

@@ -17,12 +17,13 @@ public interface RoomService {
 	public abstract int deleteRoomById(int roomId);
 
 	public abstract HostelRoom updateRoom(HostelRoom hostelRoom);
-	
-	public abstract int numberOfSharing(int typeOfSharing);
-	
-	public abstract int numberOfOccupancy(int roomOccupied);
-	
-	public abstract int numberOfVacancy(int roomVacancy);
-	
-	
+
+	public abstract HostelRoom readByNumberOfSharing(int typeOfSharing);
+
+	public abstract HostelRoom readByNumberOfOccupancy(int roomOccupied);
+
+	public abstract HostelRoom readByNumberOfVacancy(int roomVacancy);
+
+	public abstract HostelRoom getRoomByRoomId(int roomId);
+
 }

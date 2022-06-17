@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.stg.exception.GeneralException;
 import com.stg.model.Hostel;
+import com.stg.model.HostelRoom;
 import com.stg.model.Hosteller;
 import com.stg.service.HostellerService;
 import com.stg.service.HostellerServiceImpl;
@@ -61,6 +62,11 @@ public class HostellerController {
 	@DeleteMapping(value = "/deletehostlrbyname/{hostelrName}")
 	public String deleteHostlrByName(@PathVariable String hostelrName) {
 		return hostellerServiceImpl.deleteHostlrByName(hostelrName);
+	}
+	
+	@GetMapping(value = "/getalls/{hostelrNum}")
+	public Hosteller getHostellerByHostelrNum(@PathVariable int hostelrNum) {
+		return hostellerServiceImpl.getHostellerByHostelrNum(hostelrNum);
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stg.model.Hostel;
 import com.stg.model.HostelRoom;
 
 import com.stg.service.RoomService;
@@ -36,12 +37,27 @@ public class RoomController {
 		return roomService.readRoomByNumber(roomId);
 	}
 
+	@GetMapping(value = "/getRoomsharing/{typeOfSharing}")
+	public HostelRoom readByNumberOfSharing(@PathVariable int typeOfSharing) {
+		return roomService.readByNumberOfSharing(typeOfSharing);
+	}
+
+	@GetMapping(value = "/getRoomoccupancy/{roomOccupied}")
+	public HostelRoom readByNumberOfOccupancy(@PathVariable int roomOccupied) {
+		return roomService.readByNumberOfOccupancy(roomOccupied);
+	}
+
+	@GetMapping(value = "/getRoomvacancy/{roomVacancy}")
+	public HostelRoom readByNumberOfVacancy(@PathVariable int roomVacancy) {
+		return roomService.readByNumberOfVacancy(roomVacancy);
+	}
+
 	@GetMapping(value = "/createroom")
 	public List<HostelRoom> getAlls() {
 		return roomService.getRooms();
 	}
 
-	@PutMapping(value = "updateroom")
+	@PutMapping(value = "updateroom	")
 	public HostelRoom updateRoom(@RequestBody HostelRoom hostelRoom) {
 		return roomService.updateRoom(hostelRoom);
 	}
@@ -49,6 +65,11 @@ public class RoomController {
 	@DeleteMapping(value = "/createroom/{roomId}")
 	public int deleteRoomById(@PathVariable int roomId) {
 		return roomService.deleteRoomById(roomId);
+	}
+	
+	@GetMapping(value = "/getalls/{roomId}")
+	public HostelRoom getRoomByRoomId(@PathVariable int roomId) {
+		return roomService.getRoomByRoomId(roomId);
 	}
 
 }

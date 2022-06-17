@@ -28,9 +28,18 @@ public class HostellerServiceImpl implements HostellerService {
 		if ((hosteller.getHostelrdob().getYear() >= 2004) && (hosteller.getHostelrdob().getMonthValue() >= 6)) {
 			throw new GeneralException("Age Should Be Above 18");
 		} else {
-			hostellerRepository.save(hosteller);
+			HostelRoom tempRoom = roomRepository.findById(hosteller.getHostelRoom().getRoomId()).get();
+			if(tempRoom.getRoomVacancy()>0) {
+				hostellerRepository.save(hosteller);
+				tempRoom.setRoomOccupied(tempRoom.getRoomOccupied()+1);
+				tempRoom.setRoomVacancy(tempRoom.getRoomVacancy()-1);
+				roomRepository.save(tempRoom);
+				
+			}else {
+				throw new GeneralException("No Vacancy! Please try other room");
+			}
+			
 		}
-
 		return hosteller;
 	}
 
@@ -96,6 +105,18 @@ public class HostellerServiceImpl implements HostellerService {
 	public List<Hosteller> getHostellers() {
 
 		return hostellerRepository.findAll();
+	}
+
+	@Override
+	public Hosteller getHostellerByHostelrNum(int hostelrNum) {
+		Hosteller tempHosteller = null;
+		if (hostellerRepository.existsById(hostelrNum)) {
+			tempHosteller = hostellerRepository.findById(hostelrNum).get();
+			return tempHosteller;
+		} else {
+			throw new GeneralException("Hosteller Not Found");
+		}
+
 	}
 
 }

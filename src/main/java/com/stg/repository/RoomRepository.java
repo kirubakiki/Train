@@ -16,6 +16,10 @@ public interface RoomRepository extends JpaRepository<HostelRoom, Integer> {
 	
 	@Query(value =  "select * from rooms where hostelcode = ?",nativeQuery = true)
 	public abstract List<HostelRoom> findByHostCode(int hostcode);
+	
+//	public abstract int noOfVacancy(int roomVacancy );
+//	
+//	public abstract int noOfOccupied(int roomOccupied );
 
 }
 
