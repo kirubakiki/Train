@@ -52,14 +52,14 @@ public class Hosteller {
 	private int depositAmount;
 
 	@JsonBackReference(value = "user")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "roomId", referencedColumnName = "roomId", nullable = false)
 	private HostelRoom hostelRoom;
 
-	@JsonBackReference(value = "host")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode", nullable = false)
-	private Hostel hostel;
+//	@JsonBackReference(value = "host")
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode", nullable = false)
+//	private Hostel hostel;
 
 	public Hosteller() {
 		super();
@@ -80,7 +80,7 @@ public class Hosteller {
 		this.hostellerMobile = hostellerMobile;
 		this.depositAmount = hostellerAdvance;
 		this.hostelRoom = hostelRoom;
-		this.hostel = hostel;
+		//this.hostel = hostel;
 	}
 
 	public int getHostelrNum() {
@@ -171,13 +171,13 @@ public class Hosteller {
 		this.hostelRoom = hostelRoom;
 	}
 
-	public Hostel getHostel() {
-		return hostel;
-	}
-
-	public void setHostel(Hostel hostel) {
-		this.hostel = hostel;
-	}
+//	public Hostel getHostel() {
+//		return hostel;
+//	}
+//
+//	public void setHostel(Hostel hostel) {
+//		this.hostel = hostel;
+//	}
 
 //	@OneToOne
 //	@JsonManagedReference(value="addres")

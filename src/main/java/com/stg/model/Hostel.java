@@ -40,16 +40,16 @@ public class Hostel {
 	private String hostContactNumber;
 
 	@JsonManagedReference(value = "roomhostel")
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hostel")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "hostel")
 	private Set<HostelRoom> hostelRooms;
 
-	@JsonManagedReference(value = "host")
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hostel")
-	private Set<Hosteller> hostellers;
+//	@JsonManagedReference(value = "host")
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "hostel")
+//	private Set<Hosteller> hostellers;
 
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idadmin", referencedColumnName = "adminId", nullable = false) // nullable done after data feeded
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "idadmin", referencedColumnName = "adminId", nullable =false) // nullable done after data feeded
 	private Admin admin;
 //
 //	@OneToOne
@@ -73,7 +73,7 @@ public class Hostel {
 		this.pinCode = pinCode;
 		this.hostContactNumber = hostContactNumber;
 		this.hostelRooms = hostelRooms;
-		this.hostellers = hostellers;
+	//	this.hostellers = hostellers;
 		this.admin = admin;
 	}
 
@@ -149,13 +149,13 @@ public class Hostel {
 		this.hostelRooms = hostelRooms;
 	}
 
-	public Set<Hosteller> getHostellers() {
-		return hostellers;
-	}
-
-	public void setHostellers(Set<Hosteller> hostellers) {
-		this.hostellers = hostellers;
-	}
+//	public Set<Hosteller> getHostellers() {
+//		return hostellers;
+//	}
+//
+//	public void setHostellers(Set<Hosteller> hostellers) {
+//		this.hostellers = hostellers;
+//	}
 
 	public Admin getAdmin() {
 		return admin;

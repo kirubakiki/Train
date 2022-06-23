@@ -52,7 +52,7 @@ public class AdminController {
 		return map;
 	}
 
-	@GetMapping(value = "/getadminlists")
+	@GetMapping(value = "/getalladmin")
 	public List<Admin> getAllAdmin() {
 		return adminService.getadmins();
 	}
@@ -66,8 +66,8 @@ public class AdminController {
 	public int deleteByAdminId(@PathVariable int adminId) {
 		return adminService.deleteByAdminId(adminId);
 	}
-	
-	@GetMapping(value = "/getadminlists/{adminId}")
+
+	@GetMapping(value = "/getbyid/{adminId}")
 	public Admin getAdminByAdminId(@PathVariable int adminId) {
 		return adminService.getAdminByAdminId(adminId);
 	}

@@ -31,7 +31,7 @@ public class HostelController {
 	@Autowired
 	private HostelServiceImpl hostelService;
 
-	@PostMapping(value = "getalls", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "createhost", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Hostel createhost(@RequestBody Hostel hostel) {
 
 		return hostelService.createHost(hostel);
@@ -44,7 +44,7 @@ public class HostelController {
 	}
 
 	@GetMapping(value = "/readhostbyname/{alias}")
-	public Hostel readByHostCode(@PathVariable("alias") String hostName) {
+	public Hostel readHostByName(@PathVariable("alias") String hostName) {
 		return hostelService.readHostByName(hostName);
 	}
 
@@ -53,17 +53,17 @@ public class HostelController {
 		return hostelService.getHostels();
 	}
 	
-	@GetMapping(value = "/getalls/{hostCode}")
+	@GetMapping(value = "/getbycode/{hostCode}")
 	public Hostel getHostelByHostCode(@PathVariable int hostCode) {
 		return hostelService.getHostelByHostCode(hostCode);
 	}
 
-	@PutMapping(value = "updatehost")
+	@PutMapping(value = "/updatehost",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Hostel updateHost(@RequestBody Hostel hostel) {
 		return hostelService.updateHost(hostel);
 	}
 
-	@DeleteMapping(value = "/getalls/{alias}")
+	@DeleteMapping(value = "/deletehost/{alias}")
 	public int deleteHostByCode(@PathVariable("alias") int hostCode) {
 		return hostelService.deleteHostByCode(hostCode);
 	}

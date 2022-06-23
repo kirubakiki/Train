@@ -1,5 +1,6 @@
 package com.stg.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.stg.dao.HostellerDao;
 import com.stg.exception.GeneralException;
 
 import com.stg.model.Hostel;
@@ -23,25 +25,7 @@ public class HostellerServiceImpl implements HostellerService {
 	@Autowired
 	private RoomRepository roomRepository;
 
-	@Override
-	public Hosteller createHostlr(Hosteller hosteller) {
-		if ((hosteller.getHostelrdob().getYear() >= 2004) && (hosteller.getHostelrdob().getMonthValue() >= 6)) {
-			throw new GeneralException("Age Should Be Above 18");
-		} else {
-			HostelRoom tempRoom = roomRepository.findById(hosteller.getHostelRoom().getRoomId()).get();
-			if(tempRoom.getRoomVacancy()>0) {
-				hostellerRepository.save(hosteller);
-				tempRoom.setRoomOccupied(tempRoom.getRoomOccupied()+1);
-				tempRoom.setRoomVacancy(tempRoom.getRoomVacancy()-1);
-				roomRepository.save(tempRoom);
-				
-			}else {
-				throw new GeneralException("No Vacancy! Please try other room");
-			}
-			
-		}
-		return hosteller;
-	}
+	
 
 //		Hosteller temphost = null;
 //		if (hosteller.getHostelrAge() >= 18 && hosteller.getHostelrAge() <= 60) {
@@ -96,7 +80,7 @@ public class HostellerServiceImpl implements HostellerService {
 			hostellerRepository.deleteByHostelrName(hostelrName);
 
 		} else {
-			throw new GeneralException("No Name Found");
+			throw new GeneralException("No Hosteller Found");
 		}
 		return hostelrName;
 	}
@@ -118,5 +102,60 @@ public class HostellerServiceImpl implements HostellerService {
 		}
 
 	}
+
+	@Override
+	public Hosteller createHostlr(HostellerDao hostellerDao) {
+		
+		Hosteller hosteller= new Hosteller();
+		
+		HostelRoom tempRoom= roomRepository.findByRoomId(hostellerDao.getRoomId());
+		
+		
+		
+		
+		hosteller.setHostelRoom(tempRoom);
+		hosteller.setEntryDate(hostellerDao.getEntryDate());
+		hosteller.setDepositAmount(hostellerDao.getDepositAmount());
+		hosteller.setGender(hostellerDao.getGender());
+		hosteller.setHostellerAddress(hostellerDao.getHostellerAddress());
+		hosteller.setHostellerMobile(hostellerDao.getHostellerMobile());
+		hosteller.setHostellerPincode(hostellerDao.getHostellerPincode());
+		hosteller.setHostelrdob(hostellerDao.getHostelrdob());
+		hosteller.setHostelrMarStatus(hostellerDao.getHostelrMarStatus());
+		hosteller.setHostelrName(hostellerDao.getHostelrName());
+		hosteller.setHostelrNum(0);
+		
+		
+
+		if ((hosteller.getHostelrdob().getYear() >= 2004) && (hosteller.getHostelrdob().getMonthValue() >= 6)) {
+			throw new GeneralException("Age Should Be Above 18");
+		} else {
+			
+			if (tempRoom.getRoomVacancy() > 0) {
+			
+				tempRoom.setRoomOccupied(tempRoom.getRoomOccupied() + 1);
+				tempRoom.setRoomVacancy(tempRoom.getRoomVacancy() - 1);
+				roomRepository.save(tempRoom);
+				return	hostellerRepository.save(hosteller);
+
+			} else {
+				throw new GeneralException("No Vacancy! Please try other room");
+			}
+		
+			
+		}
+		
+		
+	
+		
+	}
+	
+	
+//	@Override
+//	public Hosteller createHostlr(Hosteller hosteller) {
+//		
+//		
+//		return hosteller;
+//	}
 
 }

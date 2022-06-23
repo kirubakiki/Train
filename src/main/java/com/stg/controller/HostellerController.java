@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stg.dao.HostellerDao;
 import com.stg.exception.GeneralException;
 import com.stg.model.Hostel;
 import com.stg.model.HostelRoom;
@@ -29,9 +30,15 @@ public class HostellerController {
 	@Autowired
 	private HostellerService hostellerServiceImpl;
 
-	@PostMapping(value = "getalls", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Hosteller createHostlr(@RequestBody Hosteller hosteller) {
-		return hostellerServiceImpl.createHostlr(hosteller);
+//	@PostMapping(value = "createhostelr", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public Hosteller createHostlr(@RequestBody Hosteller hosteller) {
+//		return hostellerServiceImpl.createHostlr(hosteller);
+//	}
+//	
+
+	@PostMapping(value = "createhostelr", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Hosteller createHostlr(@RequestBody HostellerDao hostellerDao) {
+		return hostellerServiceImpl.createHostlr(hostellerDao);
 	}
 
 	@GetMapping(value = "/readbyhostlrnum/{hostlrNum}")
@@ -54,7 +61,7 @@ public class HostellerController {
 		return hostellerServiceImpl.updateHostlr(hosteller);
 	} 
 
-	@DeleteMapping(value = "/getalls/{hostlrNum}")
+	@DeleteMapping(value = "/deletehostelr/{hostlrNum}")
 	public int deleteHostlrByCode(@PathVariable int hostlrNum) {
 		return hostellerServiceImpl.deleteHostlrByCode(hostlrNum);
 	}
@@ -64,7 +71,7 @@ public class HostellerController {
 		return hostellerServiceImpl.deleteHostlrByName(hostelrName);
 	}
 	
-	@GetMapping(value = "/getalls/{hostelrNum}")
+	@GetMapping(value = "/getbyhstlrnum/{hostelrNum}")
 	public Hosteller getHostellerByHostelrNum(@PathVariable int hostelrNum) {
 		return hostellerServiceImpl.getHostellerByHostelrNum(hostelrNum);
 	}

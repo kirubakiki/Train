@@ -52,17 +52,17 @@ public class RoomController {
 		return roomService.readByNumberOfVacancy(roomVacancy);
 	}
 
-	@GetMapping(value = "/createroom")
+	@GetMapping(value = "/getallroom")
 	public List<HostelRoom> getAlls() {
 		return roomService.getRooms();
 	}
 
-	@PutMapping(value = "updateroom	")
+	@PutMapping(value = "/updateroom")
 	public HostelRoom updateRoom(@RequestBody HostelRoom hostelRoom) {
 		return roomService.updateRoom(hostelRoom);
 	}
 
-	@DeleteMapping(value = "/createroom/{roomId}")
+	@DeleteMapping(value = "/deletebyid/{roomId}")
 	public int deleteRoomById(@PathVariable int roomId) {
 		return roomService.deleteRoomById(roomId);
 	}

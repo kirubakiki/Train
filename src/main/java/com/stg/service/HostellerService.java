@@ -1,13 +1,17 @@
 package com.stg.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
+import com.stg.dao.HostellerDao;
 import com.stg.model.Hostel;
 import com.stg.model.Hosteller;
 
 public interface HostellerService {
 
-	public abstract Hosteller createHostlr(Hosteller hosteller);
+//	public abstract Hosteller createHostlr(Hosteller hosteller);
+	public abstract Hosteller createHostlr(HostellerDao hostellerDao);
 
 	 public abstract List<Hosteller> getHostellers(); 
 
@@ -22,6 +26,8 @@ public interface HostellerService {
 	public abstract String deleteHostlrByName(String hostelrName);
 
 	public abstract Hosteller getHostellerByHostelrNum(int hostelrNum);
+
+	
 
 
 }

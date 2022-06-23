@@ -50,7 +50,7 @@ public class HostelServiceImpl implements HostelService {
 
 	@Override
 	public Hostel updateHost(Hostel hostel) {
-		
+
 		return hostelRepository.save(hostel);
 	}
 
@@ -70,15 +70,15 @@ public class HostelServiceImpl implements HostelService {
 
 	@Override
 	public Hostel getHostelByHostCode(int hostCode) {
-		
+
 		Hostel tempHostel = null;
-		if(hostelRepository.existsById(hostCode)) {
+		if (hostelRepository.existsById(hostCode)) {
 			tempHostel = hostelRepository.findById(hostCode).get();
 			return tempHostel;
-		}else {
+		} else {
 			throw new GeneralException("Hostel Not Found");
 		}
-		
+
 	}
 
 	/*

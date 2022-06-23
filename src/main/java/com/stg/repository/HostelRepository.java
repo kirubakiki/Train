@@ -16,7 +16,7 @@ public interface HostelRepository extends JpaRepository<Hostel, Integer> {
 	
 	public Hostel findByHostName(String hostName);
 	
-	public boolean existsByHostName(String hostName);
+	public Hostel readByHostName(String hostName);
 
 	
 	

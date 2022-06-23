@@ -31,7 +31,7 @@ public class Admin {
 	private String adminPassword;
 
 	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "admin")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "admin")
 	private List<Hostel> hostels;
 
 	public Admin() {

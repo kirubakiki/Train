@@ -25,5 +25,7 @@ public interface RoomService {
 	public abstract HostelRoom readByNumberOfVacancy(int roomVacancy);
 
 	public abstract HostelRoom getRoomByRoomId(int roomId);
+	
+
 
 }

@@ -39,12 +39,12 @@ public class HostelRoom {
 	@Column(name = "Room_Occupied")
 	private int roomOccupied;
 
-	@JsonManagedReference(value="user")
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JsonManagedReference(value = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Hosteller> hostellers;
 
-	@JsonBackReference(value="roomhostel")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference(value = "roomhostel")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode", nullable = false)
 	private Hostel hostel;
 
@@ -110,7 +110,7 @@ public class HostelRoom {
 	public void setHostellers(Set<Hosteller> hostellers) {
 		this.hostellers = hostellers;
 	}
-	
+
 	public Hostel getHostel() {
 		return hostel;
 	}
