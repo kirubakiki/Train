@@ -19,13 +19,12 @@ import com.stg.repository.RoomRepository;
 
 @Service
 public class HostellerServiceImpl implements HostellerService {
+	
 	@Autowired
 	private HostellerRepository hostellerRepository;
 
 	@Autowired
 	private RoomRepository roomRepository;
-
-	
 
 //		Hosteller temphost = null;
 //		if (hosteller.getHostelrAge() >= 18 && hosteller.getHostelrAge() <= 60) {
@@ -63,6 +62,7 @@ public class HostellerServiceImpl implements HostellerService {
 	public int deleteHostlrByCode(int hostelrNum) {
 
 		if (hostellerRepository.existsById(hostelrNum)) {
+
 			hostellerRepository.deleteById(hostelrNum);
 
 		} else {
@@ -105,14 +105,11 @@ public class HostellerServiceImpl implements HostellerService {
 
 	@Override
 	public Hosteller createHostlr(HostellerDao hostellerDao) {
-		
-		Hosteller hosteller= new Hosteller();
-		
-		HostelRoom tempRoom= roomRepository.findByRoomId(hostellerDao.getRoomId());
-		
-		
-		
-		
+
+		Hosteller hosteller = new Hosteller();
+
+		HostelRoom tempRoom = roomRepository.findByRoomId(hostellerDao.getRoomId());
+
 		hosteller.setHostelRoom(tempRoom);
 		hosteller.setEntryDate(hostellerDao.getEntryDate());
 		hosteller.setDepositAmount(hostellerDao.getDepositAmount());
@@ -124,33 +121,49 @@ public class HostellerServiceImpl implements HostellerService {
 		hosteller.setHostelrMarStatus(hostellerDao.getHostelrMarStatus());
 		hosteller.setHostelrName(hostellerDao.getHostelrName());
 		hosteller.setHostelrNum(0);
-		
-		
 
 		if ((hosteller.getHostelrdob().getYear() >= 2004) && (hosteller.getHostelrdob().getMonthValue() >= 6)) {
 			throw new GeneralException("Age Should Be Above 18");
 		} else {
-			
+
 			if (tempRoom.getRoomVacancy() > 0) {
-			
+
 				tempRoom.setRoomOccupied(tempRoom.getRoomOccupied() + 1);
 				tempRoom.setRoomVacancy(tempRoom.getRoomVacancy() - 1);
 				roomRepository.save(tempRoom);
-				return	hostellerRepository.save(hosteller);
+				return hostellerRepository.save(hosteller);
 
 			} else {
 				throw new GeneralException("No Vacancy! Please try other room");
 			}
-		
-			
+
+//			 if (hostellerRepository.deleteHosteller(hosteller)) {
+//				tempRoom.setRoomOccupied(tempRoom.getRoomOccupied()-1);
+//				tempRoom.setRoomVacancy(tempRoom.getRoomVacancy()+1);
+//				roomRepository.save(tempRoom);
+//		
+//			}
+
 		}
-		
-		
-	
-		
+
 	}
+
+	@Override
+	public List<Hosteller> getAllHosteller(String hostelrName) {
+		
+		return hostellerRepository.getAll(hostelrName);
+	}
+
+	@Override
+	public List<Hosteller> getHostellers(int roomId) {
+		
+		return hostellerRepository.getHostellers(roomId);
+	}
+
 	
+
 	
+
 //	@Override
 //	public Hosteller createHostlr(Hosteller hosteller) {
 //		

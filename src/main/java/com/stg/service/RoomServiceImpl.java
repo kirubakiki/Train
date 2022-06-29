@@ -111,4 +111,11 @@ public class RoomServiceImpl implements RoomService {
 
 	}
 
+	@Override
+	public List<HostelRoom> getRooms(int hostCode) {
+
+		return roomRepository.getRooms(hostCode);
+
+	}
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.stg.dao.HostellerDao;
 import com.stg.model.Hostel;
+import com.stg.model.HostelRoom;
 import com.stg.model.Hosteller;
 
 public interface HostellerService {
@@ -26,6 +27,10 @@ public interface HostellerService {
 	public abstract String deleteHostlrByName(String hostelrName);
 
 	public abstract Hosteller getHostellerByHostelrNum(int hostelrNum);
+	
+	public abstract List<Hosteller> getAllHosteller(String hostelrName );
+	
+	public List<Hosteller> getHostellers(int roomId);
 
 	
 

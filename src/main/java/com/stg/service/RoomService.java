@@ -26,6 +26,7 @@ public interface RoomService {
 
 	public abstract HostelRoom getRoomByRoomId(int roomId);
 	
+	public List<HostelRoom> getRooms(int hostCode);
 
 
 }

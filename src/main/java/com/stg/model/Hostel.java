@@ -26,18 +26,18 @@ public class Hostel {
 	private int hostCode;
 	@Column(name = "Hostel_Name", length = 25)
 	private String hostName;
-	@Column(name = "LANDMARK")
-	private String landMark;
-	@Column(name = "ADDRESS")
-	private String address;
+//	@Column(name = "LANDMARK")
+//	private String landMark;
+//	@Column(name = "ADDRESS")
+//	private String address;
 	@Column(name = "CITY")
 	private String city;
-	@Column(name = "STATE")
-	private String state;
-	@Column(name = "PINCODE")
-	private String pinCode;
-	@Column(name = "Hostel_Contact", length = 10)
-	private String hostContactNumber;
+//	@Column(name = "STATE")
+//	private String state;
+//	@Column(name = "PINCODE")
+//	private String pinCode;
+//	@Column(name = "Hostel_Contact", length = 10)
+//	private String hostContactNumber;
 
 	@JsonManagedReference(value = "roomhostel")
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "hostel")
@@ -66,12 +66,12 @@ public class Hostel {
 		super();
 		this.hostCode = hostCode;
 		this.hostName = hostName;
-		this.landMark = landMark;
-		this.address = address;
+		//this.landMark = landMark;
+		//this.address = address;
 		this.city = city;
-		this.state = state;
-		this.pinCode = pinCode;
-		this.hostContactNumber = hostContactNumber;
+	//	this.state = state;
+	//	this.pinCode = pinCode;
+	//	this.hostContactNumber = hostContactNumber;
 		this.hostelRooms = hostelRooms;
 	//	this.hostellers = hostellers;
 		this.admin = admin;
@@ -92,22 +92,22 @@ public class Hostel {
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
 	}
-
-	public String getLandMark() {
-		return landMark;
-	}
-
-	public void setLandMark(String landMark) {
-		this.landMark = landMark;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
+//
+//	public String getLandMark() {
+//		return landMark;
+//	}
+//
+//	public void setLandMark(String landMark) {
+//		this.landMark = landMark;
+//	}
+//
+//	public String getAddress() {
+//		return address;
+//	}
+//
+//	public void setAddress(String address) {
+//		this.address = address;
+//	}
 
 	public String getCity() {
 		return city;
@@ -117,29 +117,29 @@ public class Hostel {
 		this.city = city;
 	}
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getPinCode() {
-		return pinCode;
-	}
-
-	public void setPinCode(String pinCode) {
-		this.pinCode = pinCode;
-	}
-
-	public String getHostContactNumber() {
-		return hostContactNumber;
-	}
-
-	public void setHostContactNumber(String hostContactNumber) {
-		this.hostContactNumber = hostContactNumber;
-	}
+//	public String getState() {
+//		return state;
+//	}
+//
+//	public void setState(String state) {
+//		this.state = state;
+//	}
+//
+//	public String getPinCode() {
+//		return pinCode;
+//	}
+//
+//	public void setPinCode(String pinCode) {
+//		this.pinCode = pinCode;
+//	}
+//
+//	public String getHostContactNumber() {
+//		return hostContactNumber;
+//	}
+//
+//	public void setHostContactNumber(String hostContactNumber) {
+//		this.hostContactNumber = hostContactNumber;
+//	}
 
 	public Set<HostelRoom> getHostelRooms() {
 		return hostelRooms;

@@ -71,5 +71,10 @@ public class RoomController {
 	public HostelRoom getRoomByRoomId(@PathVariable int roomId) {
 		return roomService.getRoomByRoomId(roomId);
 	}
+	
+	@GetMapping(value = "/getRoomBy/{hostCode}")
+	public List<HostelRoom> getRooms(@PathVariable int hostCode) {
+		return roomService.getRooms(hostCode);
+	}
 
 }

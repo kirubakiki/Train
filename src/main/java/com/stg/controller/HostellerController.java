@@ -75,5 +75,21 @@ public class HostellerController {
 	public Hosteller getHostellerByHostelrNum(@PathVariable int hostelrNum) {
 		return hostellerServiceImpl.getHostellerByHostelrNum(hostelrNum);
 	}
+	
+	@GetMapping(value="getHostelrName/{hostelrName}")
+	public List<Hosteller> getAllHosteller(@PathVariable String hostelrName){
+		return hostellerServiceImpl.getAllHosteller(hostelrName);
+	}
+	
+	@GetMapping(value="getHostelelrs/{roomId}")
+	public List<Hosteller> getHostellers(@PathVariable int roomId){
+		return hostellerServiceImpl.getHostellers(roomId);
+	}
+	
+//	@GetMapping(value="getRoomsBy/{hostCode}")
+//	public List<HostelRoom> getRooms(@PathVariable int hostCode){
+//		return hostellerServiceImpl.getRooms(hostCode);
+//	}
+	
 
 }
