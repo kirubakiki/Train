@@ -22,11 +22,12 @@ public interface RoomService {
 
 	public abstract HostelRoom readByNumberOfOccupancy(int roomOccupied);
 
-	public abstract HostelRoom readByNumberOfVacancy(int roomVacancy);
+	public abstract List<HostelRoom> readByNumberOfVacancy(int roomVacancy);
 
 	public abstract HostelRoom getRoomByRoomId(int roomId);
 	
 	public List<HostelRoom> getRooms(int hostCode);
 
+	public List<HostelRoom> getVacancyRooms(int roomVacancy);
 
 }

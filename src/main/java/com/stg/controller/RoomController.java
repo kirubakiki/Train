@@ -48,7 +48,7 @@ public class RoomController {
 	}
 
 	@GetMapping(value = "/getRoomvacancy/{roomVacancy}")
-	public HostelRoom readByNumberOfVacancy(@PathVariable int roomVacancy) {
+	public List<HostelRoom> readByNumberOfVacancy(@PathVariable int roomVacancy) {
 		return roomService.readByNumberOfVacancy(roomVacancy);
 	}
 

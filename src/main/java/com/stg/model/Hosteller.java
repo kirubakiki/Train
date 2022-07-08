@@ -40,8 +40,8 @@ public class Hosteller {
 	private LocalDate hostelrdob;
 	@Column(name = "Date_Of_Joining", nullable = false)
 	private LocalDate entryDate;
-	@Column(name = "Marital_Status", nullable = false,length = 10)
-	private String hostelrMarStatus;
+//	@Column(name = "Marital_Status", nullable = false,length = 10)
+//	private String hostelrMarStatus;
 	@Column(name = "Address", length = 70, nullable = false)
 	private String hostellerAddress;
 	@Column(name = "pincode", length = 6, nullable = false)
@@ -52,7 +52,7 @@ public class Hosteller {
 	private int depositAmount;
 
 	@JsonBackReference(value = "user")
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
 	@JoinColumn(name = "roomId", referencedColumnName = "roomId", nullable = false)
 	private HostelRoom hostelRoom;
 
@@ -74,13 +74,16 @@ public class Hosteller {
 		this.gender = gender;
 		this.hostelrdob = hostelrdob;
 		this.entryDate = entryDate;
-		this.hostelrMarStatus = hostelrMarStatus;
+		//this.hostelrMarStatus = hostelrMarStatus;
 		this.hostellerAddress = hostellerAddress;
 		this.hostellerPincode = hostellerPincode;
 		this.hostellerMobile = hostellerMobile;
 		this.depositAmount = hostellerAdvance;
 		this.hostelRoom = hostelRoom;
 		//this.hostel = hostel;
+	}
+	public int getRoomId() {
+		return hostelRoom.getRoomId();
 	}
 
 	public int getHostelrNum() {
@@ -123,13 +126,13 @@ public class Hosteller {
 		this.entryDate = entryDate;
 	}
 
-	public String getHostelrMarStatus() {
-		return hostelrMarStatus;
-	}
-
-	public void setHostelrMarStatus(String hostelrMarStatus) {
-		this.hostelrMarStatus = hostelrMarStatus;
-	}
+//	public String getHostelrMarStatus() {
+//		return hostelrMarStatus;
+//	}
+//
+//	public void setHostelrMarStatus(String hostelrMarStatus) {
+//		this.hostelrMarStatus = hostelrMarStatus;
+//	}
 
 	public String getHostellerAddress() {
 		return hostellerAddress;

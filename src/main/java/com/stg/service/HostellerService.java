@@ -31,6 +31,8 @@ public interface HostellerService {
 	public abstract List<Hosteller> getAllHosteller(String hostelrName );
 	
 	public List<Hosteller> getHostellers(int roomId);
+	
+	
 
 	
 

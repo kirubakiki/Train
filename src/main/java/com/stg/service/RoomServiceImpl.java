@@ -90,14 +90,7 @@ public class RoomServiceImpl implements RoomService {
 		return hostelRoom;
 	}
 
-	@Override
-	public HostelRoom readByNumberOfVacancy(int roomVacancy) {
-		Optional<HostelRoom> optionalHostel = roomRepository.findById(roomVacancy);
-
-		HostelRoom hostelRoom = optionalHostel.get();
-
-		return hostelRoom;
-	}
+	
 
 	@Override
 	public HostelRoom getRoomByRoomId(int roomId) {
@@ -116,6 +109,18 @@ public class RoomServiceImpl implements RoomService {
 
 		return roomRepository.getRooms(hostCode);
 
+	}
+
+	@Override
+	public List<HostelRoom> readByNumberOfVacancy(int roomVacancy) {
+		
+		return roomRepository.findAll();
+	}
+
+	@Override
+	public List<HostelRoom> getVacancyRooms(int roomVacancy) {
+		
+		return null;
 	}
 
 }

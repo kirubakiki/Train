@@ -25,8 +25,9 @@ public interface RoomRepository extends JpaRepository<HostelRoom, Integer> {
 	@Query(value = "select * from rooms where hostelcode=?",nativeQuery = true)
 	public List<HostelRoom> getRooms(int hostCode);
 	
-
-//	public abstract int noOfVacancy(int roomVacancy );
+	
+	@Query(value = "select * from rooms where room_vacancy=?",nativeQuery = true)
+	public abstract List<HostelRoom> findByNoOfVacancy(int roomVacancy );
 //	
 //	public abstract int noOfOccupied(int roomOccupied );
 	

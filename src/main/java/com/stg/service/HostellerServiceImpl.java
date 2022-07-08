@@ -19,7 +19,7 @@ import com.stg.repository.RoomRepository;
 
 @Service
 public class HostellerServiceImpl implements HostellerService {
-	
+
 	@Autowired
 	private HostellerRepository hostellerRepository;
 
@@ -60,10 +60,15 @@ public class HostellerServiceImpl implements HostellerService {
 
 	@Override
 	public int deleteHostlrByCode(int hostelrNum) {
-
+		HostelRoom tempRoom = null;
 		if (hostellerRepository.existsById(hostelrNum)) {
 
+			Hosteller tempHosteller = hostellerRepository.getById(hostelrNum);
 			hostellerRepository.deleteById(hostelrNum);
+			tempRoom = roomRepository.getById(tempHosteller.getHostelRoom().getRoomId());
+			tempRoom.setRoomOccupied(tempRoom.getRoomOccupied() - 1);
+			tempRoom.setRoomVacancy(tempRoom.getRoomVacancy() + 1);
+			roomRepository.save(tempRoom);
 
 		} else {
 			throw new GeneralException("No Hosteller Found");
@@ -118,7 +123,7 @@ public class HostellerServiceImpl implements HostellerService {
 		hosteller.setHostellerMobile(hostellerDao.getHostellerMobile());
 		hosteller.setHostellerPincode(hostellerDao.getHostellerPincode());
 		hosteller.setHostelrdob(hostellerDao.getHostelrdob());
-		hosteller.setHostelrMarStatus(hostellerDao.getHostelrMarStatus());
+	//	hosteller.setHostelrMarStatus(hostellerDao.getHostelrMarStatus());
 		hosteller.setHostelrName(hostellerDao.getHostelrName());
 		hosteller.setHostelrNum(0);
 
@@ -150,19 +155,17 @@ public class HostellerServiceImpl implements HostellerService {
 
 	@Override
 	public List<Hosteller> getAllHosteller(String hostelrName) {
-		
+
 		return hostellerRepository.getAll(hostelrName);
 	}
 
 	@Override
 	public List<Hosteller> getHostellers(int roomId) {
-		
+
 		return hostellerRepository.getHostellers(roomId);
 	}
 
-	
 
-	
 
 //	@Override
 //	public Hosteller createHostlr(Hosteller hosteller) {

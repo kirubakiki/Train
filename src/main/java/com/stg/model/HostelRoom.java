@@ -40,11 +40,11 @@ public class HostelRoom {
 	private int roomOccupied;
 
 	@JsonManagedReference(value = "user")
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
 	private List<Hosteller> hostellers;
 
 	@JsonBackReference(value = "roomhostel")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne( cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
 	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode", nullable = false)
 	private Hostel hostel;
 
@@ -62,7 +62,9 @@ public class HostelRoom {
 		this.roomOccupied = roomOccupied;
 		this.hostellers = (List<Hosteller>) hostellers;
 	}
-
+	public String getHostCode() {
+		return hostel.getHostName();
+	}
 	public int getRoomId() {
 		return roomId;
 	}
