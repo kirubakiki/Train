@@ -14,10 +14,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Builder;
+
 
 @Entity
 @Table(name = "admin")
@@ -31,7 +29,7 @@ public class Admin {
 	private String adminPassword;
 
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "admin")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "admin")
 	private List<Hostel> hostels;
 
 	public Admin() {

@@ -17,6 +17,6 @@ public interface AdminService {
 	public abstract Admin updateAdmin(Admin admin);
 
 	public abstract Admin Login(String adminName, String adminPassword);
-	
+
 	public abstract Admin getAdminByAdminId(int adminId);
 }

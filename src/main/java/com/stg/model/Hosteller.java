@@ -1,7 +1,6 @@
 package com.stg.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,21 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.lang.NonNull;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Entity
 public class Hosteller {
@@ -52,38 +42,43 @@ public class Hosteller {
 	private int depositAmount;
 
 	@JsonBackReference(value = "user")
-	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "roomId", referencedColumnName = "roomId", nullable = false)
 	private HostelRoom hostelRoom;
 
-//	@JsonBackReference(value = "host")
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode", nullable = false)
-//	private Hostel hostel;
+	@JsonBackReference(value = "host")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode")
+	private Hostel hostel;
+	
+	//	public String getHostName() {
+	//		return hostel.getHostName();
+	//	}
+	
+
+	public int getRoomNumber() {
+		return hostelRoom.getRoomNumber();
+	}
 
 	public Hosteller() {
 		super();
 	}
 
 	public Hosteller(int hostelrNum, String hostelrName, String gender, LocalDate hostelrdob, LocalDate entryDate,
-			String hostelrMarStatus, String hostellerAddress, int hostellerPincode, String hostellerMobile,
-			int hostellerAdvance, HostelRoom hostelRoom, Hostel hostel) {
+			String hostellerAddress, int hostellerPincode, String hostellerMobile, int depositAmount,
+			HostelRoom hostelRoom, Hostel hostel) {
 		super();
 		this.hostelrNum = hostelrNum;
 		this.hostelrName = hostelrName;
 		this.gender = gender;
 		this.hostelrdob = hostelrdob;
 		this.entryDate = entryDate;
-		//this.hostelrMarStatus = hostelrMarStatus;
 		this.hostellerAddress = hostellerAddress;
 		this.hostellerPincode = hostellerPincode;
 		this.hostellerMobile = hostellerMobile;
-		this.depositAmount = hostellerAdvance;
+		this.depositAmount = depositAmount;
 		this.hostelRoom = hostelRoom;
-		//this.hostel = hostel;
-	}
-	public int getRoomId() {
-		return hostelRoom.getRoomId();
+		this.hostel = hostel;
 	}
 
 	public int getHostelrNum() {
@@ -126,14 +121,6 @@ public class Hosteller {
 		this.entryDate = entryDate;
 	}
 
-//	public String getHostelrMarStatus() {
-//		return hostelrMarStatus;
-//	}
-//
-//	public void setHostelrMarStatus(String hostelrMarStatus) {
-//		this.hostelrMarStatus = hostelrMarStatus;
-//	}
-
 	public String getHostellerAddress() {
 		return hostellerAddress;
 	}
@@ -174,16 +161,12 @@ public class Hosteller {
 		this.hostelRoom = hostelRoom;
 	}
 
-//	public Hostel getHostel() {
-//		return hostel;
-//	}
-//
-//	public void setHostel(Hostel hostel) {
-//		this.hostel = hostel;
-//	}
+	public Hostel getHostel() {
+		return hostel;
+	}
 
-//	@OneToOne
-//	@JsonManagedReference(value="addres")
-//	private Address address;
+	public void setHostel(Hostel hostel) {
+		this.hostel = hostel;
+	}
 
 }

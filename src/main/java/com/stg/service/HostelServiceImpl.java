@@ -3,24 +3,25 @@ package com.stg.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stg.exception.GeneralException;
-import com.stg.model.Admin;
+
 import com.stg.model.Hostel;
-import com.stg.model.Hosteller;
+
 import com.stg.repository.HostelRepository;
 
 @Service
 public class HostelServiceImpl implements HostelService {
+	
 	@Autowired
 	private HostelRepository hostelRepository;
 
 	@Override
-	public Hostel createHost(Hostel hostel) {
+	public Hostel createhost(Hostel hostel) {
 
 		return hostelRepository.save(hostel);
 
@@ -39,7 +40,7 @@ public class HostelServiceImpl implements HostelService {
 
 		Hostel hostel = optionalHostel.get();
 
-		return hostel;
+		return hostel; 
 	}
 
 	@Override

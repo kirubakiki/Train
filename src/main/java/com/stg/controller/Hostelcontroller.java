@@ -3,7 +3,9 @@ package com.stg.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,29 +14,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stg.model.Admin;
 import com.stg.model.Hostel;
 import com.stg.service.HostelService;
-import com.stg.service.HostelServiceImpl;
 
 @RestController
-@RequestMapping(value = "host")
+@RequestMapping(value = "/host")
 @CrossOrigin(origins = "http://localhost:4200")
-public class HostelController {
+public class Hostelcontroller {
 	@Autowired
-	private HostelServiceImpl hostelService;
+	private HostelService hostelService;
 
-	@PostMapping(value = "createhost", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Hostel createhost(@RequestBody Hostel hostel) {
+	@PostMapping(value = "/hostel", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Hostel> createhost(@RequestBody Hostel hostel) {
 
-		return hostelService.createHost(hostel);
+		return new ResponseEntity<Hostel>(hostelService.createhost(hostel), HttpStatus.CREATED);
 	}
 
 	@GetMapping(value = "/readhostbycode/{alias}")
@@ -52,13 +48,13 @@ public class HostelController {
 	public List<Hostel> getAll() {
 		return hostelService.getHostels();
 	}
-	
+
 	@GetMapping(value = "/getbycode/{hostCode}")
 	public Hostel getHostelByHostCode(@PathVariable int hostCode) {
 		return hostelService.getHostelByHostCode(hostCode);
 	}
 
-	@PutMapping(value = "/updatehost",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/updatehost", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Hostel updateHost(@RequestBody Hostel hostel) {
 		return hostelService.updateHost(hostel);
 	}

@@ -11,11 +11,13 @@ import com.stg.model.ResponseError;
 
 @ControllerAdvice
 public class GlobalException {
+
 	@ExceptionHandler(value = GeneralException.class)
 	ResponseEntity<ResponseError> tellException(GeneralException generalException,
 			HttpServletRequest httpServletRequest) {
 		ResponseError responseError = new ResponseError(generalException.getMessage(),
 				httpServletRequest.getRequestURI());
+
 		return new ResponseEntity<>(responseError, HttpStatus.NOT_FOUND);
 	}
 

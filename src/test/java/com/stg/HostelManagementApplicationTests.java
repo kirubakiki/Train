@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class HostelManagementApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void firstmethod() {
+
 	}
 
 }

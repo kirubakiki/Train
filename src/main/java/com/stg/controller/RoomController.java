@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stg.model.Hostel;
 import com.stg.model.HostelRoom;
 
 import com.stg.service.RoomService;
@@ -66,12 +65,12 @@ public class RoomController {
 	public int deleteRoomById(@PathVariable int roomId) {
 		return roomService.deleteRoomById(roomId);
 	}
-	
+
 	@GetMapping(value = "/getalls/{roomId}")
 	public HostelRoom getRoomByRoomId(@PathVariable int roomId) {
 		return roomService.getRoomByRoomId(roomId);
 	}
-	
+
 	@GetMapping(value = "/getRoomBy/{hostCode}")
 	public List<HostelRoom> getRooms(@PathVariable int hostCode) {
 		return roomService.getRooms(hostCode);

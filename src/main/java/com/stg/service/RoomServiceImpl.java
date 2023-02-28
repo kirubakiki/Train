@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stg.exception.GeneralException;
-import com.stg.model.Hostel;
+
 import com.stg.model.HostelRoom;
 
 import com.stg.repository.RoomRepository;
@@ -90,8 +90,6 @@ public class RoomServiceImpl implements RoomService {
 		return hostelRoom;
 	}
 
-	
-
 	@Override
 	public HostelRoom getRoomByRoomId(int roomId) {
 		HostelRoom tempHostelroom = null;
@@ -113,13 +111,13 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public List<HostelRoom> readByNumberOfVacancy(int roomVacancy) {
-		
+
 		return roomRepository.findAll();
 	}
 
 	@Override
 	public List<HostelRoom> getVacancyRooms(int roomVacancy) {
-		
+
 		return null;
 	}
 

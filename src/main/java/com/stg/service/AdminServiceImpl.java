@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.stg.exception.GeneralException;
 import com.stg.model.Admin;
-import com.stg.model.Hosteller;
+
 import com.stg.repository.AdminRepository;
 
 @Service
@@ -68,7 +68,9 @@ public class AdminServiceImpl implements AdminService {
 			}
 
 		} else {
+
 			throw new GeneralException("Admin Not Found");
+
 		}
 
 	}
@@ -76,13 +78,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Admin getAdminByAdminId(int adminId) {
 		Admin tempAdmin = null;
-		if(adminRepository.existsById(adminId)) {
+		if (adminRepository.existsById(adminId)) {
 			tempAdmin = adminRepository.findById(adminId).get();
 			return tempAdmin;
-		}else {
+		} else {
 			throw new GeneralException("Admin Not Found");
 		}
-		
-		
+
 	}
 }

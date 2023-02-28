@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.stg.model.Admin;
 import com.stg.model.Constants;
-import com.stg.model.Hostel;
+
 import com.stg.service.AdminService;
 
 import io.jsonwebtoken.Jwts;
@@ -30,13 +32,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "admin")
 public class AdminController {
+	
 	@Autowired
 	private AdminService adminService;
 
 	@PostMapping(value = "admins", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Admin createhost(@RequestBody Admin admin) {
+	public ResponseEntity<Admin> createhost(@RequestBody Admin admin) {
 
-		return adminService.createAdmin(admin);
+		return new ResponseEntity<Admin>(adminService.createAdmin(admin), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/authenticate")
@@ -58,8 +61,8 @@ public class AdminController {
 	}
 
 	@PutMapping(value = "/getadminlist")
-	public Admin updateAdmin(@RequestBody Admin admin) {
-		return adminService.updateAdmin(admin);
+	public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin) {
+		return new ResponseEntity<Admin>(adminService.updateAdmin(admin), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/getadminlists/{adminId}")

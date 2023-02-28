@@ -2,7 +2,6 @@
 package com.stg.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +17,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.Builder;
 
 @Entity
 @Table(name = "rooms")
@@ -40,11 +41,11 @@ public class HostelRoom {
 	private int roomOccupied;
 
 	@JsonManagedReference(value = "user")
-	@OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hostelRoom")
 	private List<Hosteller> hostellers;
 
 	@JsonBackReference(value = "roomhostel")
-	@ManyToOne( cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hostelcode", referencedColumnName = "hostCode", nullable = false)
 	private Hostel hostel;
 
@@ -53,18 +54,21 @@ public class HostelRoom {
 	}
 
 	public HostelRoom(int roomId, int typeOfSharing, int roomNumber, int roomVacancy, int roomOccupied,
-			Set<Hosteller> hostellers) {
+			List<Hosteller> hostellers, Hostel hostel) {
 		super();
 		this.roomId = roomId;
 		this.typeOfSharing = typeOfSharing;
 		this.roomNumber = roomNumber;
 		this.roomVacancy = roomVacancy;
 		this.roomOccupied = roomOccupied;
-		this.hostellers = (List<Hosteller>) hostellers;
+		this.hostellers = hostellers;
+		this.hostel = hostel;
 	}
-	public String getHostCode() {
+
+	public String getHostName() {
 		return hostel.getHostName();
 	}
+
 	public int getRoomId() {
 		return roomId;
 	}

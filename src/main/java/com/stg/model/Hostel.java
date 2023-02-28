@@ -1,5 +1,6 @@
 package com.stg.model;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,11 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.Builder;
 
 @Entity
 @Table(name = "hostel")
@@ -40,45 +43,29 @@ public class Hostel {
 //	private String hostContactNumber;
 
 	@JsonManagedReference(value = "roomhostel")
-	@OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,  mappedBy = "hostel")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hostel")
 	private Set<HostelRoom> hostelRooms;
 
-//	@JsonManagedReference(value = "host")
-//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "hostel")
-//	private Set<Hosteller> hostellers;
+	@JsonManagedReference(value = "host")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hostel")
+	private Set<Hosteller> hostellers;
 
 	@JsonBackReference
-	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-	@JoinColumn(name = "idadmin", referencedColumnName = "adminId", nullable =false) // nullable done after data feeded
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idadmin", referencedColumnName = "adminId", nullable = false) // nullable done after data feeded
 	private Admin admin;
-//
+
 //	@OneToOne
 //	@JsonManagedReference(value = "add")
 //	private Address address;
 
-	public Hostel() {
-		super();
+
+	public String getAdminName() {
+		return admin.getAdminName();
 	}
 
-	public Hostel(int hostCode, String hostName, String landMark, String address, String city, String state,
-			String pinCode, String hostContactNumber, Set<HostelRoom> hostelRooms, Set<Hosteller> hostellers,
-			Admin admin) {
+	public Hostel() {
 		super();
-		this.hostCode = hostCode;
-		this.hostName = hostName;
-		//this.landMark = landMark;
-		//this.address = address;
-		this.city = city;
-	//	this.state = state;
-	//	this.pinCode = pinCode;
-	//	this.hostContactNumber = hostContactNumber;
-		this.hostelRooms = hostelRooms;
-	//	this.hostellers = hostellers;
-		this.admin = admin;
-	}
-	
-	public int getAdminId() {
-		return admin.getAdminId();
 	}
 
 	public int getHostCode() {
@@ -96,22 +83,6 @@ public class Hostel {
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
 	}
-//
-//	public String getLandMark() {
-//		return landMark;
-//	}
-//
-//	public void setLandMark(String landMark) {
-//		this.landMark = landMark;
-//	}
-//
-//	public String getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddress(String address) {
-//		this.address = address;
-//	}
 
 	public String getCity() {
 		return city;
@@ -121,30 +92,6 @@ public class Hostel {
 		this.city = city;
 	}
 
-//	public String getState() {
-//		return state;
-//	}
-//
-//	public void setState(String state) {
-//		this.state = state;
-//	}
-//
-//	public String getPinCode() {
-//		return pinCode;
-//	}
-//
-//	public void setPinCode(String pinCode) {
-//		this.pinCode = pinCode;
-//	}
-//
-//	public String getHostContactNumber() {
-//		return hostContactNumber;
-//	}
-//
-//	public void setHostContactNumber(String hostContactNumber) {
-//		this.hostContactNumber = hostContactNumber;
-//	}
-
 	public Set<HostelRoom> getHostelRooms() {
 		return hostelRooms;
 	}
@@ -153,13 +100,13 @@ public class Hostel {
 		this.hostelRooms = hostelRooms;
 	}
 
-//	public Set<Hosteller> getHostellers() {
-//		return hostellers;
-//	}
-//
-//	public void setHostellers(Set<Hosteller> hostellers) {
-//		this.hostellers = hostellers;
-//	}
+	public Set<Hosteller> getHostellers() {
+		return hostellers;
+	}
+
+	public void setHostellers(Set<Hosteller> hostellers) {
+		this.hostellers = hostellers;
+	}
 
 	public Admin getAdmin() {
 		return admin;
@@ -167,6 +114,32 @@ public class Hostel {
 
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
+	}
+
+	public Hostel(int hostCode, String hostName, String city, Set<HostelRoom> hostelRooms, Set<Hosteller> hostellers,
+			Admin admin) {
+		super();
+		this.hostCode = hostCode;
+		this.hostName = hostName;
+		this.city = city;
+		this.hostelRooms = hostelRooms;
+		this.hostellers = hostellers;
+		this.admin = admin;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Hostel hostel = (Hostel) o;
+		return hostCode == hostel.hostCode && hostName.equals(hostel.hostName) && city.equals(hostel.city);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(hostCode, hostName, city);
 	}
 
 }

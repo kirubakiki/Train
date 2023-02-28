@@ -2,12 +2,12 @@ package com.stg.service;
 
 import java.util.List;
 
-import com.stg.model.Admin;
+
 import com.stg.model.Hostel;
 
 public interface HostelService {
 
-	public abstract Hostel createHost(Hostel hostel);
+	public abstract Hostel createhost(Hostel hostel);
 
 	public abstract List<Hostel> getHostels();
 
@@ -20,6 +20,7 @@ public interface HostelService {
 	public abstract int deleteHostByCode(int hostCode);
 
 	public abstract Hostel getHostelByHostCode(int hostCode);
-	//public abstract String deleteHostByName(String hostName);
+
+	// public abstract String deleteHostByName(String hostName);
 
 }
